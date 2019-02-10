@@ -17,7 +17,7 @@
 \maketitle
 
 \section{What is the Lightning Network?}
- The Lightning Network is a second layer scaling solution for blockchains. It enables extremely fast and cheap transfers of value off-chain that can be settled on-chain at any moment. At the same time, the Lightning Network does not sacrifice trustlessness, security or decentralization. To achieve this, the Lightning Network is based on the broader concept of payment channels, which are implemented through a limited set of smart contracts.
+ The Lightning Network is a second layer scaling solution for blockchains. It enables extremely fast and cheap transfers of value off-chain that can be settled on-chain at any moment. At the same time, the Lightning Network does not sacrifice trustlessness, security or decentralization of the underlying protocol. To achieve this, the Lightning Network is based on the broader concept of payment channels, which are implemented through a limited set of smart contracts.
 
 \begin{figure}[h]
 	\centering
@@ -36,7 +36,9 @@ To begin with, faster block time does not necessarily mean faster payment confir
 
 Furthermore, there are many use cases that we want to use digital cash for, where there is only minimal tolerance for wait times. It may be ok to wait for a couple of minutes when you are paying for beers at a local bar and you are not in a hurry to leave. But think of just quickly grabbing a drink from a vending machine while you are trying to catch your train or paying at a busy checkout with a long queue of other nervous customers behind you. For Beam to take over these use cases as well, we clearly need to achieve “Visa level” speed of payments, if not even beat it. Trials have shown that the Lightning Network is able to achieve payment speeds that make the payment experience as quick and easy as a credit card payment which make it one of the cornerstones along the way to achieve mainstream adoption of cryptocurrencies in general.
 
-Last but not least, Beam’s transaction capacity per second is currently about three times that of Bitcoin, which is a nice increase. But it is still not nearly at a level that would allow for “Visa level” transaction throughput. If we can achieve a user experience that enables mainstream adoption as described in the previous paragraph, we also need the transaction capacity that is able to carry it. A second layer solution like Lightning Network allows transaction capacity to scale orders of magnitude without the need to extend the base layer of the blockchain. Mainstream adoption would simply not be feasible without it.
+In addition, Beam’s transaction capacity per second is currently about three times that of Bitcoin, which is a nice increase. But it is still not nearly at a level that would allow for “Visa level” transaction throughput. If we can achieve a user experience that enables mainstream adoption as described in the previous paragraph, we also need the transaction capacity that is able to carry it. A second layer solution like Lightning Network allows transaction capacity to scale orders of magnitude without the need to extend the base layer of the blockchain. Mainstream adoption would simply not be feasible without it.
+
+Last but not least, we are mitigating issues that are not a problem for Beam at the moment but could become more important in the future just as they have been for Bitcoin in the past. Fees on the Lightning Network should be significantly lower than using on-chain transactions. While fees are low in Beam at the moment this may change as we see more significant adoption. The same goes for block space: Beam blocks are far from being full right now but will fill up further as we see more transactions.
 
 \section{Lightning Network challenges on Beam}
 There are many differences between MimbleWimble and Bitcoin, and some of these differences are posing issues for the Lightning Network integration of Beam. Some, like the interactive nature of transaction construction, luckily solve themselves. Lightning nodes need to be reliably online most of the time anyway. The major issue, however, is the lack of scripts in the MimbleWimble protocol. 
@@ -54,6 +56,9 @@ But how do we chain these concepts together without a script? Where there are mu
 	\includegraphics[width=\textwidth]{lightning_mw_transactions_htlc}
 	\caption{Exemplary transaction structure on Alice’ side of a Lightning Network payment channel on MimbleWimble.}
 \end{figure}
+
+\section{MimbleWimble's advantage over Bitcoin}
+Its privacy properties are one of the major reasons why MimbleWimble chains are so appealing to many people. This feature also shines when comparing Lightning Network implementations on Bitcoin with its still theoretical counterpart on MimbleWimble chains. A funding transaction that is opening a channel on the Bitcoin blockchain followed by a closing transaction that is resolving the same channel together leave a pattern of transactions that can be fairly easy to spot. At the very least, the two participants of the channel, the initial state, and the end state are exposed and could be combined with other data from monitoring the Lightning Network itself to further invade user privacy. MimbleWimble, on the other hand, uses confidential transactions which hide participants and amounts on-chain, making these kinds of attacks impossible.
 
 \section{Project Roadmap}
 Throughout the past couple of weeks, the development team of Beam has been researching the necessary requirements for a Lightning Network integration with Beam. For that purpose, we are working on a fork of the Lightning Network RFCs that document the adaptations to the protocol on a high level to work with any MimbleWimble implementation \cite{lmw}.
